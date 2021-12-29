@@ -18,12 +18,12 @@ export function getSortedPostsData() {
 
     return {
       id,
-      ...matterResult.data,
+      ...(matterResult.data as { date: string; title: string }),
     };
   });
 
-  return allPostsData.sort(({ date: a }, { date: b }) => {
-    if (a < b) {
+  return allPostsData.sort((a, b) => {
+    if (a.date < b.date) {
       return 1;
     } else if (a > b) {
       return -1;
@@ -58,6 +58,6 @@ export async function getPostData(id) {
   return {
     id,
     contentHtml,
-    ...matterResult.data,
+    ...(matterResult.data as { date: string; title: string }),
   };
 }
